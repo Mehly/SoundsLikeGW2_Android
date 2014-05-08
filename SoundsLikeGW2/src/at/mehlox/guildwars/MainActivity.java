@@ -1,25 +1,50 @@
-
 package at.mehlox.guildwars;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EActivity;
+import java.sql.SQLException;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EActivity;
+
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import at.mehlox.guildwars.data.ormlite.DatabaseHelper;
+import at.mehlox.guildwars.rest.RestClient;
+import at.mehlox.guildwars.rest.entities.base.ItemBase;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity
-    extends SherlockActivity
-{
+public class MainActivity extends FragmentActivity {
 
+	@Bean
+	RestClient mRestClient;
 
-    @AfterViews
-    void afterViews() {
-    }
+	@Bean
+	DatabaseHelper mDatabase;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater();
-        return true;
-    }
+	@AfterViews
+	void afterViews() {
+		loadEvents();
+	}
+
+	@Background
+	protected void loadEvents() {
+
+		int[] itemIds = mRestClient.getItemIds();
+		try {
+			ItemBase itemBase = mDatabase.getItem(itemIds[0]);
+			if (itemBase == null) {
+
+				itemBase = mRestClient.getItemDetails(itemIds[0]);
+
+				mDatabase.createOrUpdateItem(itemBase);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Log.i(getClass().getSimpleName(), "Loaded items: " + itemIds.length);
+
+	}
 
 }
