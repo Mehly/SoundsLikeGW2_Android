@@ -1,7 +1,23 @@
 <resources>
 
-	<string name="app_name">SoundsLikeGW2</string>
-	<string name="hello_world">Hello world!</string>
-	<string name="menu_settings">Settings</string>
+    <string name="app_name">SoundsLikeGW2</string>
+    <string name="menu_settings">Settings</string>
+    <string name="ingame_account_name">Mehlox.1337</string>
+
+    <!-- Actionbar titles -->
+    <string name="events">Events</string>
+    <string name="alarms">Alarms</string>
+    <string name="about">About</string>
+
+    <!-- About Fragment -->
+    <string name="about_donations_text">Thank you for using and supporting this app. As you\'ve already noticed this application comes to you for free and doesn\'t use any annyoing advertisement inside the app.\n\nIf you really want to contribute or just give the developer of this app a virtual, \"financial\" Thumbs-Up, feel free to send in-game donations to the account of the developer, which is as follows:</string>
+    <string name="about_donations_thanks">Thanks in advance for being a Good Guy Greg!</string>
+
+    <!-- Sliding Panel Menu -->
+
+    <string name="sliding_panel_active_event">Currently active event:</string>
+    <string name="sliding_panel_alarms">Alarms</string>
+    <string name="sliding_panel_items">Items</string>
+    <string name="sliding_panel_about">About</string>
 
 </resources>

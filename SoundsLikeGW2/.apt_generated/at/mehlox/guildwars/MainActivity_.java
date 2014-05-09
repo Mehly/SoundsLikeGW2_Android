@@ -11,10 +11,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import at.mehlox.guildwars.R.id;
 import at.mehlox.guildwars.R.layout;
 import at.mehlox.guildwars.data.ormlite.DatabaseHelper_;
 import at.mehlox.guildwars.rest.RestClient_;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.SdkVersionHelper;
 import org.androidannotations.api.view.HasViews;
@@ -38,9 +41,9 @@ public final class MainActivity_
     }
 
     private void init_(Bundle savedInstanceState) {
-        mRestClient = RestClient_.getInstance_(this);
-        mDatabase = DatabaseHelper_.getInstance_(this);
         OnViewChangedNotifier.registerOnViewChangedListener(this);
+        mDatabase = DatabaseHelper_.getInstance_(this);
+        mRestClient = RestClient_.getInstance_(this);
     }
 
     @Override
@@ -83,6 +86,37 @@ public final class MainActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
+        mSlidingPanel = ((SlidingUpPanelLayout) hasViews.findViewById(id.sliding_layout));
+        {
+            View view = hasViews.findViewById(id.sliding_panel_alarms);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        MainActivity_.this.onClickAlarms();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.sliding_panel_about);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        MainActivity_.this.onClickAbout();
+                    }
+
+                }
+                );
+            }
+        }
         afterViews();
     }
 

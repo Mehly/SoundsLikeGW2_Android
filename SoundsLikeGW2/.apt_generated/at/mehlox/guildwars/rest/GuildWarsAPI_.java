@@ -51,12 +51,15 @@ public final class GuildWarsAPI_
     }
 
     @Override
-    public EventListWrapper getEvents() {
+    public ItemBase getItemDetails(int itemId, String lang) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
         HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
+        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
+        urlVariables.put("itemId", itemId);
+        urlVariables.put("lang", lang);
         try {
-            return restTemplate.exchange(rootUrl.concat("/events.json"), HttpMethod.GET, requestEntity, EventListWrapper.class).getBody();
+            return restTemplate.exchange(rootUrl.concat("/item_details.json?item_id={itemId}&lang={lang}"), HttpMethod.GET, requestEntity, ItemBase.class, urlVariables).getBody();
         } catch (RestClientException e) {
             if (restErrorHandler!= null) {
                 restErrorHandler.onRestClientExceptionThrown(e);
@@ -68,33 +71,12 @@ public final class GuildWarsAPI_
     }
 
     @Override
-    public List<WorldName> getWorldNames(String lang) {
+    public ItemIdsWrapper getItemIds() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
         HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
-        urlVariables.put("lang", lang);
         try {
-            return restTemplate.exchange(rootUrl.concat("/world_names.json?lang={lang}"), HttpMethod.GET, requestEntity, List_WorldName.class, urlVariables).getBody();
-        } catch (RestClientException e) {
-            if (restErrorHandler!= null) {
-                restErrorHandler.onRestClientExceptionThrown(e);
-                return null;
-            } else {
-                throw e;
-            }
-        }
-    }
-
-    @Override
-    public List<MapName> getMapNames(String lang) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
-        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
-        urlVariables.put("lang", lang);
-        try {
-            return restTemplate.exchange(rootUrl.concat("/map_names.json?lang={lang}"), HttpMethod.GET, requestEntity, List_MapName.class, urlVariables).getBody();
+            return restTemplate.exchange(rootUrl.concat("/items.json"), HttpMethod.GET, requestEntity, ItemIdsWrapper.class).getBody();
         } catch (RestClientException e) {
             if (restErrorHandler!= null) {
                 restErrorHandler.onRestClientExceptionThrown(e);
@@ -125,49 +107,67 @@ public final class GuildWarsAPI_
     }
 
     @Override
-    public ItemIdsWrapper getItemIds() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
-        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        try {
-            return restTemplate.exchange(rootUrl.concat("/items.json"), HttpMethod.GET, requestEntity, ItemIdsWrapper.class).getBody();
-        } catch (RestClientException e) {
-            if (restErrorHandler!= null) {
-                restErrorHandler.onRestClientExceptionThrown(e);
-                return null;
-            } else {
-                throw e;
-            }
-        }
-    }
-
-    @Override
-    public ItemBase getItemDetails(int itemId, String lang) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
-        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
-        urlVariables.put("itemId", itemId);
-        urlVariables.put("lang", lang);
-        try {
-            return restTemplate.exchange(rootUrl.concat("/item_details.json?item_id={itemId}&lang={lang}"), HttpMethod.GET, requestEntity, ItemBase.class, urlVariables).getBody();
-        } catch (RestClientException e) {
-            if (restErrorHandler!= null) {
-                restErrorHandler.onRestClientExceptionThrown(e);
-                return null;
-            } else {
-                throw e;
-            }
-        }
-    }
-
-    @Override
     public BuildInfo getBuildInfo() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
         HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
         try {
             return restTemplate.exchange(rootUrl.concat("/build.json"), HttpMethod.GET, requestEntity, BuildInfo.class).getBody();
+        } catch (RestClientException e) {
+            if (restErrorHandler!= null) {
+                restErrorHandler.onRestClientExceptionThrown(e);
+                return null;
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    @Override
+    public List<WorldName> getWorldNames(String lang) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
+        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
+        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
+        urlVariables.put("lang", lang);
+        try {
+            return restTemplate.exchange(rootUrl.concat("/world_names.json?lang={lang}"), HttpMethod.GET, requestEntity, List_WorldName.class, urlVariables).getBody();
+        } catch (RestClientException e) {
+            if (restErrorHandler!= null) {
+                restErrorHandler.onRestClientExceptionThrown(e);
+                return null;
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    @Override
+    public EventListWrapper getEvents() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
+        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
+        try {
+            return restTemplate.exchange(rootUrl.concat("/events.json"), HttpMethod.GET, requestEntity, EventListWrapper.class).getBody();
+        } catch (RestClientException e) {
+            if (restErrorHandler!= null) {
+                restErrorHandler.onRestClientExceptionThrown(e);
+                return null;
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    @Override
+    public List<MapName> getMapNames(String lang) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/json")));
+        HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
+        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
+        urlVariables.put("lang", lang);
+        try {
+            return restTemplate.exchange(rootUrl.concat("/map_names.json?lang={lang}"), HttpMethod.GET, requestEntity, List_MapName.class, urlVariables).getBody();
         } catch (RestClientException e) {
             if (restErrorHandler!= null) {
                 restErrorHandler.onRestClientExceptionThrown(e);

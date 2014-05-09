@@ -1,5 +1,79 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light" />
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+    </style>
+
+    <!-- ACTION-BAR -->
+
+    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:displayOptions">showTitle</item>
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:background">@color/red_dark</item>
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- TEXT STYLES: SMALL -->
+
+    <style name="TextSmall" parent="@android:style/TextAppearance">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="TextSmallBold" parent="@style/TextSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSmallBoldWhite" parent="@style/TextSmallBold">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextSmallWhite" parent="@style/TextSmall">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- TEXT STYLES: MEDIUM -->
+
+    <style name="TextMedium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextMediumWhite" parent="@style/TextMedium">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextMediumBold" parent="@style/TextMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextMediumBoldWhite" parent="@style/TextMediumBold">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- TEXT STYLES: LARGE -->
+    <style name="TextLarge" parent="@android:style/TextAppearance">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="TextLargeBold" parent="@style/TextLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextLargeBoldWhite" parent="@style/TextLargeBold">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- BUTTON STYLES -->
+
+    <style name="ButtonMenu" parent="android:Widget">
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:drawablePadding">@dimen/padding_very_small</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/white_transparent</item>
+        <item name="android:background">@drawable/selector_button_menu</item>
+    </style>
 
 </resources>
